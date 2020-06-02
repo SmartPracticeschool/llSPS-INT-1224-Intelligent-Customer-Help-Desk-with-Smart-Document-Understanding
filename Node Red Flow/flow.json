@@ -1,1 +1,164 @@
-
+[
+    {
+        "id": "1db0db0d.229fc5",
+        "type": "tab",
+        "label": "Customer Helpdesk Chatbot",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "649ddf60.1c9c7",
+        "type": "ui_form",
+        "z": "1db0db0d.229fc5",
+        "name": "",
+        "label": "",
+        "group": "c2f2bf00.a2ea6",
+        "order": 1,
+        "width": 13,
+        "height": 2,
+        "options": [
+            {
+                "label": "Enter your query",
+                "value": "input",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "input": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "fd86f76b.2d9ab8"
+            ]
+        ]
+    },
+    {
+        "id": "fd86f76b.2d9ab8",
+        "type": "function",
+        "z": "1db0db0d.229fc5",
+        "name": "Input Parsing",
+        "func": "msg.payload = msg.payload.input\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "807c9fba.c94c",
+                "eeeae9eb.bdba88"
+            ]
+        ]
+    },
+    {
+        "id": "807c9fba.c94c",
+        "type": "watson-conversation-v1",
+        "z": "1db0db0d.229fc5",
+        "name": "Chatbot",
+        "workspaceid": "48511c93-e923-49af-ad98-fb8161845fd3",
+        "multiuser": false,
+        "context": true,
+        "empty-payload": false,
+        "service-endpoint": "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/4326b91d-342c-43c5-b373-f30b1b86de0b",
+        "timeout": "",
+        "optout-learning": false,
+        "x": 560,
+        "y": 300,
+        "wires": [
+            [
+                "6948656a.0ab68c"
+            ]
+        ]
+    },
+    {
+        "id": "6948656a.0ab68c",
+        "type": "function",
+        "z": "1db0db0d.229fc5",
+        "name": "Output Parsing",
+        "func": "\nmsg.payload = msg.payload.output.text[0];\nreturn msg; ",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 240,
+        "wires": [
+            [
+                "b1ef267c.257858",
+                "d24ac7a3.a300e8"
+            ]
+        ]
+    },
+    {
+        "id": "b1ef267c.257858",
+        "type": "debug",
+        "z": "1db0db0d.229fc5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 900,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d24ac7a3.a300e8",
+        "type": "ui_text",
+        "z": "1db0db0d.229fc5",
+        "group": "c2f2bf00.a2ea6",
+        "order": 3,
+        "width": 10,
+        "height": 10,
+        "name": "",
+        "label": "Assistant:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 930,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "eeeae9eb.bdba88",
+        "type": "ui_text",
+        "z": "1db0db0d.229fc5",
+        "group": "c2f2bf00.a2ea6",
+        "order": 17,
+        "width": 13,
+        "height": 2,
+        "name": "",
+        "label": "You:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 460,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c2f2bf00.a2ea6",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chatbot",
+        "tab": "d78cd201.1239b",
+        "order": 1,
+        "disp": true,
+        "width": 27,
+        "collapse": false
+    },
+    {
+        "id": "d78cd201.1239b",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Intelligent Customer Helpdesk",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
