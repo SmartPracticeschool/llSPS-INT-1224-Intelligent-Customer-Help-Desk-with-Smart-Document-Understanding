@@ -15,4 +15,4 @@ I have used Tesla Car manual as the document for Watson Discovery.
 
 Node-RED Dashboard Link after deploying:- https://node-red-ijowm.eu-gb.mybluemix.net/ui/
 
-Youtube Video link:- 
+Youtube Video link:- https://youtu.be/xjMbgbF5CBU
